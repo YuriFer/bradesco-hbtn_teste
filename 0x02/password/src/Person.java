@@ -1,5 +1,3 @@
-package password.src;
-
 public class Person {
     private String usuario;
     private String password;
