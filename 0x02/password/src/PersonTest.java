@@ -65,8 +65,10 @@ public class PersonTest {
 
     @ParameterizedTest
     @CsvSource({
-        "abC123456$,Hbtn@1234",
-        "Betty@1#2,Hbtn@123"
+        "abC123456$",
+        "Hbtn@1234",
+        "Betty@1#2",
+        "Hbtn@123"
     })
     public void check_password_valid(String password) {
         person.setPassword(password);
