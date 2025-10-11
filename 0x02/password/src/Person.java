@@ -20,7 +20,7 @@ public class Person {
     }
 
     public boolean checkPassword() {
-        return this.password.length() >= 8 && this.password.matches(".*\\d.*") && this.password.matches(".*[A-Z].*") && this.password.matches("^[a-zA-Z0-9@#$%&*]+$");
+        return this.password.matches(".*[A-Z].*") && this.password.matches(".*\\d.*") && this.password.matches("^[a-zA-Z0-9@#$%&*]+$") && this.password.length() >= 8;
     }
 
     public void setUsuario(String string) {
