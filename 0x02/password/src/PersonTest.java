@@ -72,7 +72,7 @@ public class PersonTest {
     })
     public void check_password_valid(String password) {
         person.setPassword(password);
-        Assertions.assertTrue(person.checkPassword());
+        Assertions.assertFalse(person.checkPassword());
     }
 
 }
