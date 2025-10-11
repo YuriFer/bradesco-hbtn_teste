@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,56 +13,54 @@ public class PersonTest {
         person = new Person();
     }
 
-    @Test
-    public void check_user_valid () {
-        person.setUsuario("PaulMcCartney2");
-        person.setPassword("NeilArms2");
+    @ParameterizedTest
+    @CsvSource({
+        "PaulMcCartney2",
+        "NeilArms2"
+    })
+    public void check_user_valid(String usuario) {
+        person.setUsuario(usuario);
         Assertions.assertTrue(person.checkUser());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "Paul#McCartney",
+        "Neil@Arms"
+    })
+    public void check_user_not_valid(String usuario) {
+        person.setUsuario(usuario);
+        Assertions.assertFalse(person.checkUser());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "123456789",
+        "#$%1234"
+    })
+    public void does_not_have_letters(String password) {
+        person.setPassword(password);
         Assertions.assertFalse(person.checkPassword());
     }
 
-    @Test
-    public void check_user_not_valid() {
-        person.setUsuario("Paul#McCartney");
-        person.setPassword("Neil@Arms");
-        Assertions.assertFalse(person.checkUser());
+    @ParameterizedTest
+    @CsvSource({
+        "Abcabcdefgh@",
+        "#hbtn@%tc"
+    })
+    public void does_not_have_numbers(String password) {
+        person.setPassword(password);
         Assertions.assertFalse(person.checkPassword());
     }
 
-    @Test
-    public void does_not_have_letters() {
-        person.setUsuario("123456789");
-        person.setPassword("#$%1234");
-
-        Assertions.assertFalse(person.checkUser());
+    @ParameterizedTest
+    @CsvSource({
+        "Abc@123",
+        "12$@hbt"
+    })
+    public void does_not_have_eight_chars(String password) {
+        person.setPassword(password);
         Assertions.assertFalse(person.checkPassword());
-    }
-
-    @Test
-    public void does_not_have_numbers() {
-        person.setUsuario("Abcabcdefgh@");
-        person.setPassword("#hbtn@%tc");
-
-        Assertions.assertFalse(person.checkUser());
-        Assertions.assertFalse(person.checkPassword());
-    }
-
-    @Test
-    public void does_not_have_eight_chars() {
-        person.setUsuario("Abc@123");
-        person.setPassword("12$@hbt");
-
-        Assertions.assertFalse(person.checkUser());
-        Assertions.assertFalse(person.checkPassword());
-    }
-
-    @Test
-    public void check_password_valid() {
-        person.setUsuario("abC123456$");
-        person.setPassword("Hbtn@1234");
-
-        Assertions.assertFalse(person.checkUser());
-        Assertions.assertTrue(person.checkPassword());
     }
 
     @ParameterizedTest
@@ -71,11 +68,8 @@ public class PersonTest {
         "abC123456$,Hbtn@1234",
         "Betty@1#2,Hbtn@123"
     })
-    public void check_password_valid_parametrized(String usuario, String password) {
-        person.setUsuario(usuario);
+    public void check_password_valid(String password) {
         person.setPassword(password);
-
-        Assertions.assertFalse(person.checkUser());
         Assertions.assertTrue(person.checkPassword());
     }
 
