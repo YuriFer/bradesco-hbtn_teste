@@ -20,7 +20,23 @@ public class Person {
     }
 
     public boolean checkPassword() {
-        return this.password.matches(".*[A-Z].*") && this.password.matches(".*\\d.*") && this.password.matches("^[a-zA-Z0-9@#$%&*]+$") && this.password.length() >= 8;
+        if (!this.password.matches(".*[A-Z].*")) {
+            return false;
+        }
+
+        if (!this.password.matches(".*\\d.*")) {
+            return false;
+        }
+
+        if (!this.password.matches("^[a-zA-Z0-9@#$%&*]+$")) {
+            return false;
+        }
+
+        if (this.password.length() < 8) {
+            return false;
+        }
+
+        return true;
     }
 
     public void setUsuario(String string) {
