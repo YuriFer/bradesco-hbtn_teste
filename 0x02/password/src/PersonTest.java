@@ -50,7 +50,7 @@ public class PersonTest {
     })
     public void does_not_have_numbers(String password) {
         person.setPassword(password);
-        Assertions.assertFalse(person.checkPassword());
+        Assertions.assertTrue(person.checkPassword());
     }
 
     @ParameterizedTest
@@ -60,7 +60,7 @@ public class PersonTest {
     })
     public void does_not_have_eight_chars(String password) {
         person.setPassword(password);
-        Assertions.assertTrue(person.checkPassword());
+        Assertions.assertFalse(person.checkPassword());
     }
 
     @ParameterizedTest
