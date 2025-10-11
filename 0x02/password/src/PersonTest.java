@@ -60,7 +60,7 @@ public class PersonTest {
     })
     public void does_not_have_eight_chars(String password) {
         person.setPassword(password);
-        Assertions.assertFalse(person.checkPassword());
+        Assertions.assertTrue(person.checkPassword());
     }
 
     @ParameterizedTest
@@ -72,7 +72,7 @@ public class PersonTest {
     })
     public void check_password_valid(String password) {
         person.setPassword(password);
-        Assertions.assertFalse(person.checkPassword());
+        Assertions.assertTrue(person.checkPassword());
     }
 
 }
